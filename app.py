@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 # 加载模型
 @st.cache_resource
 def load_model():
-    model = joblib.load('best_xgb_model.pkl')
+    model = joblib.load('/web/best_xgb_model.pkl')
     return model
 
 
@@ -46,7 +46,7 @@ features = {}
 
 for i,feature in enumerate(feature_names):
     features[feature] = st.number_input(f'{feature}:', value=values[i])
-scale=joblib.load('scaler.pkl')
+scale=joblib.load('/web/scaler.pkl')
 
 # 创建预测按钮
 if st.button('预测'):
