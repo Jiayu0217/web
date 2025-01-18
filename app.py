@@ -9,8 +9,6 @@ import pickle
 import os
 # 加载模型
 @st.cache_resource
-
-
 def download_model():
     url = "https://github.com/Jiayu0217/web/raw/master/best_xgb.pkl"  # GitHub 原始文件 URL
     response = requests.get(url)
