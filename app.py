@@ -5,6 +5,9 @@ import joblib
 import shap
 import matplotlib.pyplot as plt
 import pickle
+import os
+print(os.getcwd())
+
 @st.cache_resource
 def load_model():
     # 加载模型文件
