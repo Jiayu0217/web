@@ -8,15 +8,7 @@ import pickle
 import os
 print(os.getcwd())
 
-@st.cache_resource
-def load_model():
-    # 加载模型文件
-    with open('streamlit/model/best_xgb_model.pkl', 'rb') as f:
-        model = pickle.load(f)
-    return model
-
-# 调用模型加载函数
-model = load_model()
+model = joblib.load('best_xgb_model.pkl')
 
 # 创建Streamlit应用
 st.title('***预测')
