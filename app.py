@@ -4,15 +4,15 @@ import numpy as np
 import joblib
 import shap
 import matplotlib.pyplot as plt
-
-
-# 加载模型
+import pickle
 @st.cache_resource
 def load_model():
-    model = joblib.load('streamlit/best_xgb_model.pkl')
+    # 加载模型文件
+    with open('streamlit/model/best_xgb_model.pkl', 'rb') as f:
+        model = pickle.load(f)
     return model
 
-
+# 调用模型加载函数
 model = load_model()
 
 # 创建Streamlit应用
