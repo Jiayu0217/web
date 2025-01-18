@@ -7,8 +7,12 @@ import matplotlib.pyplot as plt
 import pickle
 import os
 print(os.getcwd())
-
-model = joblib.load('best_xgb_model.pkl')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# 组合当前目录与模型文件名，生成模型的完整路径
+model_path = os.path.join(current_dir, 'best_xgb_model.pkl')
+# 打开并加载模型
+with open(model_path, 'rb') as file:
+    model = pickle.load(file)
 
 # 创建Streamlit应用
 st.title('***预测')
