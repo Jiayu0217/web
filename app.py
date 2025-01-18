@@ -2,17 +2,33 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
+import shap
 import matplotlib.pyplot as plt
+import requests
 import pickle
 import os
-print(os.getcwd())
-current_dir = os.path.dirname(os.path.abspath(__file__))
-# 组合当前目录与模型文件名，生成模型的完整路径
-model_path = os.path.join(current_dir, 'best_xgb_model.pkl')
-# 打开并加载模型
-with open(model_path, 'rb') as file:
-    model = pickle.load(file)
+# 加载模型
+@st.cache_resource
 
+
+def download_model():
+    url = "https://github.com/Jiayu0217/web/raw/master/best_xgb.pkl"  # GitHub 原始文件 URL
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open('best_xgb.pkl', 'wb') as f:
+            f.write(response.content)
+        print("Model downloaded successfully!")
+    else:
+        print("Failed to download model.")
+
+# 下载模型
+download_model()
+# 加载模型
+def load_model():
+    with open('best_xgb.pkl', 'rb') as f:
+        model = pickle.load(f)
+    return model
+model = load_model()
 # 创建Streamlit应用
 st.title('***预测')
 
@@ -44,7 +60,7 @@ features = {}
 
 for i,feature in enumerate(feature_names):
     features[feature] = st.number_input(f'{feature}:', value=values[i])
-scale=joblib.load('streamlit/scaler.pkl')
+scale=joblib.load('scaler.pkl')
 
 # 创建预测按钮
 if st.button('预测'):
