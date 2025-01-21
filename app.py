@@ -8,19 +8,6 @@ import pickle
 import os
 # 加载模型
 @st.cache_resource
-def download_model():
-    url = "https://github.com/Jiayu0217/web/raw/master/best_xgb.pkl"  # GitHub 原始文件 URL
-    response = requests.get(url)
-    if response.status_code == 200:
-        with open('best_xgb.pkl', 'wb') as f:
-            f.write(response.content)
-        print("Model downloaded successfully!")
-    else:
-        print("Failed to download model.")
-
-# 下载模型
-download_model()
-# 加载模型
 def load_model():
     with open('best_xgb.pkl', 'rb') as f:
         model = pickle.load(f)
